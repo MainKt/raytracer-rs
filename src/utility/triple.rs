@@ -17,7 +17,7 @@ impl Triple {
         self.2
     }
 
-    fn length_squared(&self) -> f64 {
+    pub(crate) fn length_squared(&self) -> f64 {
         self.x().powi(2) + self.y().powi(2) + self.z().powi(2)
     }
 

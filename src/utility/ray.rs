@@ -7,9 +7,9 @@ pub struct Ray {
 }
 
 impl Ray {
-    // pub fn at(&self, t: f64) -> Point {
-    //     (self.origin.components + t * self.direction.components).into()
-    // }
+    pub fn at(&self, t: f64) -> Point {
+        (self.origin.components + t * self.direction.components).into()
+    }
 
     // pub fn color(&self) -> Color {
     //     let direction = self.direction.components.unit();
