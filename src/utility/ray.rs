@@ -1,6 +1,5 @@
 use super::Point;
 use super::Vector;
-use crate::utility::Color;
 
 pub struct Ray {
     pub origin: Point,
@@ -12,12 +11,12 @@ impl Ray {
     //     (self.origin.components + t * self.direction.components).into()
     // }
 
-    pub fn color(&self) -> Color {
-        let direction = self.direction.components.unit();
-        let a = 0.5 * (direction.y() + 1.0);
-
-        ((1.0 - a) * Color::new(1.0, 1.0, 1.0).components
-            + a * Color::new(0.5, 0.7, 1.0).components)
-            .into()
-    }
+    // pub fn color(&self) -> Color {
+    //     let direction = self.direction.components.unit();
+    //     let a = 0.5 * (direction.y() + 1.0);
+    //
+    //     ((1.0 - a) * Color::new(1.0, 1.0, 1.0).components
+    //         + a * Color::new(0.5, 0.7, 1.0).components)
+    //         .into()
+    // }
 }

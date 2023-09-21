@@ -1,6 +1,6 @@
 mod utility;
 
-use crate::utility::{Point, Ray, Vector};
+use crate::utility::{color_ray_on_sphere, Point, Ray, Vector};
 use indicatif::ProgressIterator;
 use std::fs::File;
 use std::io::{self, Write};
@@ -20,8 +20,8 @@ fn render(mut image: File) -> io::Result<()> {
 
     let focal_length = 1.0;
     let viewport_height = 2.0;
-    let viewport_width = viewport_height * (image_width / image_height) as f64;
-    let camera_center = Point::default(); // (0, 0, 0)
+    let viewport_width = viewport_height * image_width as f64 / image_height as f64;
+    let camera_center = Point::new(0.0, 0.0, 0.0);
 
     let viewport_u = Vector::new(viewport_width, 0.0, 0.0);
     let viewport_v = Vector::new(0.0, -viewport_height, 0.0);
@@ -41,7 +41,7 @@ fn render(mut image: File) -> io::Result<()> {
     for j in (0..image_height).progress() {
         for i in 0..image_width {
             let pixel_center =
-                pixel00_location + i as f64 * pixel_delta_u + j as f64 * pixel_delta_v;
+                pixel00_location + (i as f64 * pixel_delta_u) + (j as f64 * pixel_delta_v);
             let ray_direction = pixel_center - camera_center.components;
 
             let ray = Ray {
@@ -49,7 +49,7 @@ fn render(mut image: File) -> io::Result<()> {
                 direction: ray_direction.into(),
             };
 
-            let pixel_color = ray.color();
+            let pixel_color = color_ray_on_sphere(&ray);
 
             pixel_color.render(&mut image)?;
         }

@@ -6,11 +6,11 @@ pub struct Point {
 }
 
 impl Point {
-    // pub fn new(x: f64, y: f64, z: f64) -> Self {
-    //     Self {
-    //         components: Triple::new(x, y, z),
-    //     }
-    // }
+    pub fn new(x: f64, y: f64, z: f64) -> Self {
+        Self {
+            components: Triple::new(x, y, z),
+        }
+    }
 }
 
 impl From<Triple> for Point {
